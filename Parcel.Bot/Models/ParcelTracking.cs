@@ -18,7 +18,7 @@ namespace Parcel.Bot.Models
         public static IForm<ParcelTracking> BuildForm()
         {
             return new FormBuilder<ParcelTracking>()
-                .Message("Lass uns einmal schauen, wo dein Paket ist!")
+                .Message("Let's see where we can find your package!")
                 .Field(nameof(TrackingNumber), validate: async (state, value) =>
                 {
                     // Check if entered tracking number is valid
