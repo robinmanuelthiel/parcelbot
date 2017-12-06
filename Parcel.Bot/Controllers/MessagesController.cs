@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Parcel.Bot.Dialogs;
+using Parcel.Bot.Models;
+using Parcel.Bot.Services;
 
 namespace Parcel.Bot
 {
@@ -18,7 +21,10 @@ namespace Parcel.Bot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new Dialogs.LuisDialog());
+                await Conversation.SendAsync(activity, () => Chain.From(() =>
+                    new LuisDialog(
+                        ParcelTracking.BuildForm,
+                        new ParcelService())));
             }
             else
             {
